@@ -1,0 +1,44 @@
+[
+    {
+      "name": "Jordan 1 OG BRED",
+      "price": 400.0,
+      "image": "/images/bred1.webp",
+      "qty_available": 10,
+      "description": "Back in 1984, after debuting his iconic Air Jordan 1 shoe, His Airness was fined by the league $5K every time he wore the black and red kicks. Why? Because their colors broke the league's uniform rules."
+    },
+    {
+      "name": "Jordan 4 White Cement",
+      "price": 350.0,
+      "image": "/images/cement4.jpg",
+      "qty_available": 10,
+      "description": "The Air Jordan IV was MJ's first signature model to take flight. Complete with never before seen Wings acting as lace locks and an unforgettable color scheme, the silhouette now returns in its truest form. Nodding to its 1989 debut, the new Air Jordan IV features iconic Nike Air branding on both the heel and outsole."
+    },
+    {
+      "name": "Jordan 5 UNC",
+      "price": 300.0,
+      "image": "/images/unc5.jpg",
+      "qty_available": 10,
+      "description": "The Air Jordan 5 UNC sneakers now arrive in a University Blue, black, and white colour scheme - in honour of the University of North Carolina. This pair is crafted from leather and features silver 3M reflective tongues and a collegiate patch on the heels."
+    },
+    {
+      "name": "Jordan 6 Infrared",
+      "price": 240.0,
+      "image": "/images/infrared6.webp",
+      "qty_available": 10,
+      "description": "Jordan wore the Black/Infrared colorway of the VI for the postseason in 1991. The black colorway symbolized Jordan being locked into playoff mode. The 1991 Playoffs kicked off the Bulls Dynasty. The team would go on to win five more championships in 1990s."
+    },
+    {
+      "name": "Jordan 11 Concord",
+      "price": 280.0,
+      "image": "/images/concord11.webp",
+      "qty_available": 10,
+      "description": "In 1995, Michael Jordan stepped onto the hardwood for playoff competition in the now iconic Air Jordan XI. The never-before-seen silhouette shined bright with patent leather atop a translucent sole, and featured MJ's number 45 at the heel."
+    },
+    {
+      "name": "Jordan 12 Flu Game",
+      "price": 320.0,
+      "image": "/images/flugame12.jpg",
+      "qty_available": 10,
+      "description": "As the story goes, MJ laced up this black and red Air Jordan 12 colorway during Game 5 of the 1997 NBA Finals between the Chicago Bulls and the Utah Jazz, where he scored a game-high 38 points despite battling flu-like symptoms."
+    }
+  ]
