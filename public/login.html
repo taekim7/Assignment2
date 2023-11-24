@@ -1,0 +1,31 @@
+<!--Login Page-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1><span id="top_title">Cool Shoe Store</span></h1>
+
+            <h2>Login Page</h2>
+            <form action="/login" method="POST" name = "login_form">
+                <input type="text" name="username" id="usernameInput" size="40" placeholder="enter username"><br />
+                <input type="password" name="password" size="40" placeholder="enter password"><br />
+                <input type="submit" value="Submit" id="submit">
+            </form>
+
+            <!-- Add button to registration page -->
+            <a href="/registration.html">Don't have an account? Register here </a>
+        </div>
+    </div>
+    <script src = "./login.js" defer></script>
+</body>
+</html>

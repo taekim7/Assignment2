@@ -1,0 +1,40 @@
+<!--Registration Page-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    
+</head>
+    <body>
+      <div class="jumbotron">
+        <div class="container text-center">
+        <h1><span id="top_title">Cool Shoe Store</span></h1>
+
+        <h2>Registration</h2>
+        <form action="/registration" method="POST">
+            <input type="text" name="username" size="40" placeholder="enter username" ><br />
+            <input type="password" name="password" size="40" placeholder="enter password"><br />
+            <input type="password" name="repeat_password" size="40" placeholder="enter password again"><br />
+            <input type="email" name="email" size="40" placeholder="enter email" ><br />
+            <input type="text" name="name" size="40" placeholder="enter name" ><br />
+            <input type="submit" value="Register" id="submit">
+        </form>
+
+        <!-- Add button to login page -->
+        <a href="/login.html">Already have an account? Login here </a>
+        </div>
+      </div>
+      <!-- Back to Product Display Page -->
+      <a href="/products_display.html">Back to Product Display Page</a>
+
+</head>
+<body>
+    
+</body>
+</html>
