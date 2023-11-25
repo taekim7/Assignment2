@@ -1,6 +1,50 @@
 //Invoice JS
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if the user is logged in
+    const userLoggedIn = isUserLoggedIn();
+
+    // Get the logoff button element
+    const logoffButton = document.getElementById("logoffButton");
+
+    // Show or hide the logoff button based on the user's login status
+    if (userLoggedIn) {
+      logoffButton.style.display = "block";
+    } else {
+      logoffButton.style.display = "none";
+    }
+
+    // Add an event listener to the logoff button for the logoff functionality
+    logoffButton.addEventListener("click", function () {
+      // During logoff, remove the token from localStorage
+      localStorage.removeItem("userToken");
+
+      // Your logic to redirect the user to the login page
+      window.location.href = "/login.html";
+    });
+
+    // Add a button to go back to the products display page
+    const backButton = document.createElement("button");
+    backButton.innerText = "Back to Products";
+    backButton.addEventListener("click", function () {
+      // Your logic to navigate back to the products display page
+      window.location.href = "/products_display.html";
+    });
+
+    // Append the back button to a container in your HTML
+    document.body.appendChild(backButton);
+  });
+
+  // Function to check if the user is logged in
+  function isUserLoggedIn() {
+    return localStorage.getItem("userToken") !== null;
+  }
+
+
+
+
+
 //global variables
 let extendedPrices = [];
 let extendedPrice = 0;

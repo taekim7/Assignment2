@@ -1,5 +1,41 @@
 //products_display.js
 
+// Function to check if the user is logged in
+function checkIfLoggedIn() {
+    // In a real-world scenario, you might have a more sophisticated check
+    // This is a simple example using a flag
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
+
+// Update UI based on login status
+function updateUIBasedOnLoginStatus() {
+    let isLoggedIn = checkIfLoggedIn();
+    let logoffButton = document.getElementById('logoffButton');
+
+    if (isLoggedIn) {
+        logoffButton.style.display = 'block';
+    } else {
+        logoffButton.style.display = 'none';
+    }
+}
+
+// Logoff button click event
+document.getElementById('logoffButton').addEventListener('click', function () {
+    // Perform logoff actions
+    performLogoffActions();
+});
+
+// Perform logoff actions
+function performLogoffActions() {
+    // Clear the login status flag
+    localStorage.removeItem('isLoggedIn');
+    // Redirect to the login page
+    window.location.href = '/login.html';
+}
+
+// Call the function to update the UI based on login status
+updateUIBasedOnLoginStatus();
+
 //get parameters
 let params = (new URL(document.location)).searchParams;
 let error;
@@ -75,3 +111,28 @@ for (let i = 0; i < products.length; i++) {
         //console.log(products[quantity.id])
     }
 
+    document.querySelector('form[name="qty_form"]').addEventListener('submit', function (event) {
+        event.preventDefault();
+    
+        // Check if the user is logged in (you can implement your own authentication logic)
+        let isLoggedIn = checkIfLoggedIn();
+    
+        if (isLoggedIn) {
+            // User is logged in, proceed to the invoice page
+            submitFormAndRedirect();
+        } else {
+            // User is not logged in, redirect to the login page
+            window.location.href = '/login.html';
+        }
+    });
+    
+    function checkIfLoggedIn() {
+        // In a real-world scenario, you might have a more sophisticated check
+        // This is a simple example using a session variable
+        return sessionStorage.getItem('isLoggedIn') === 'true';
+    }
+
+    function submitFormAndRedirect() {
+        // Submit the form to the process_form route
+        document.forms['qty_form'].submit();
+    }
