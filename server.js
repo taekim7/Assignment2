@@ -36,6 +36,16 @@ app.get("/products.js", function (request, response, next) {
     response.send(products_str);
 });
 
+
+
+
+
+
+
+
+
+
+
 // whenever a post with process form is received
 app.post("/process_form", function (request, response) {
     // get the quantities
@@ -95,7 +105,18 @@ app.post("/process_form", function (request, response) {
     }
 });
 
-// app post for login
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////// app post for login////////////////////////////////////
 app.post("/login", function (request, response) {
     let username_entered = request.body['username'];
     let password_entered = request.body['password'];
@@ -151,7 +172,18 @@ app.all('*', function (request, response, next) {
 
 
 
-// Post for Register
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////// Post for Register///////////////////////////////
 app.post("/register", function (request, response) {
     // Process a simple register form
     let new_user = request.body.username.trim(); // Trim to remove leading and trailing spaces
@@ -217,8 +249,28 @@ function isValidPassword(password) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 // Start the server; listen on port 8080 for incoming HTTP requests
 app.listen(8080, () => console.log(`listening on port 8080`));
+
+
+
+
+
+
+
+
+
+
 
 // function to validate the quantity
 function validateQuantity(quantity) {
