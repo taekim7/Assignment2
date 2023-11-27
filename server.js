@@ -163,6 +163,15 @@ function isValidPassword(password) {
     return password.length >= 10 && password.length <= 16 && password === password && !/\s/.test(password);
 }
 
+
+
+
+
+
+
+
+
+
 // Route all other GET requests to serve static files from a directory named "public"
 app.all('*', function (request, response, next) {
     // console.log(request.method + ' to ' + request.path);
