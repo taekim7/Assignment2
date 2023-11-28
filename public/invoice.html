@@ -17,6 +17,7 @@
         <div class="container text-center">
         <h1><span id="top_title">Cool Shoe Store</span></h1>
         <p>Here is your invoice. Thank you for your purchase and enjoy your shoes!</p>
+        <h5 id = "hellomsg" style="color: red" ></h5>
         <button id="logoffButton" style="display: none;">Log Off</button>
         </div>
 
@@ -62,7 +63,12 @@
             </tfoot>
             </table>
           </div>
+<div class = "buttons-container">
+  <form name = "invoice" method = "POST"></form>
+  <input class = "sm-button" type = "submit" value = "Continue Shopping" name = "continue" onclick = "invoice.action='/continue_shopping'" style = "width: 40%">
 
+  <input class = "sm-button" type = "submit" value = "Complete Purchase" name = "logout" onclick = "invoice.action='/purchase_logout'" style = "width: 40%">
+</div>
 
 
                        <!--Javascript for invoice-->
