@@ -8,6 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" defer></script>
     <link rel="stylesheet" type="text/css" href="products_display.css">
+    <link rel="icon" href="data:,">
     <!--<script src="./products.js"></script>-->
     <script type="text/javascript" src="./products.js"></script>
 </head>
@@ -20,9 +21,22 @@
     <main>
     </div>
 </div>
-<audio controls autoplay loop>
-    <source src="./music/01 - Heaven Is A Place On Earth.mp3" type="audio/mpeg">
-</audio>
+
+
+<div class="container2">
+	<div class="title">
+		<h3 id = "helloMsg" style = "color: black"></h3>
+	</div>
+	<div class="ghost">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+</div>
+
+
 </header>
 
 
@@ -37,49 +51,46 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>                        
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
               <li class="active"><a href="homepage.html">Home</a></li>
               <li><a href="#">Products</a></li>
-              <li><a href="#">Deals</a></li>
-              <li><a href="#">Stores</a></li>
-              <li><a href="#">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-              <button id="logoffButton" style="display: none;">Log Off</button>
+              <li><a href="./login.html"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
             </ul>
           </div>
         </div>
       </nav>
-      
+              
               <!--Red Error Message-->
-      <div class="container">
-      <div class="col text-center">
-      <div id="errorDiv"></div>
-      </div>
-      </div>
+              <div class="container">
+                <h3 id="errorMessage" style="color: #ff2e2e;"></h3>
+              
 
-        <form name="qty_form" action="process_form" method="POST">
-          <h1><span id="top_title"></span></h1>
-          <div class="container">
-              <div class="row">
-                  <!--Products will by added dynamically-->
-              </div>
-          </div>
-  
-                           <!--Purchase Button-->
-          <footer class="text-center py-4">
-              <div class="row">
-                  <div class="col">
-                      <input type="submit" value="Purchase" class="btn btn-secondary">
+
+                <!--Awesome Audio-->
+                <div class="audio-container">
+                  <div class="song-info">
+                    <p id="artist">Bonnie Tyler</p>
+                    <p id="title">Holding Out For a Hero</p>
                   </div>
-              </div>
-          </footer>
+                  <audio controls autoplay loop>
+                      <source src="./music/07. Bonnie Tyler - Holding Out For a Hero.mp3" type="audio/mpeg">
+                  </audio>
+                  
+
+
+
+                <!-- Product Display Grid-->
+                <form action="/process_purchase" method="POST" name="qty_form" class="qty_form">
+                    <div class="row"></div>
+                    <input type="submit" value="Purchase" class="sm-button highlight">
       </form>
+    </div>
   </body>
 
 <script defer src="./products_display.js"></script>

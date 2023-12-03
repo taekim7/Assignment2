@@ -1,52 +1,56 @@
 /* invoice.css */
 
-.img-small {
-    max-width: 300px; /* Adjust the max-width as needed */
-    height: auto;
-    position: relative;
-    display: inline-block;
+.invoice-table-image {
+    width: 100%; /* Set the desired width */
+     /* Set the desired height */
+    border-radius: 5px; /* Optional: Apply border-radius for rounded corners */
 }
 
-/* Tooltip styles for description */
-.img-small:hover::after {
-    content: attr(data-tooltip);
-    display: block;
-    position: absolute;
-    background-color: clear(0, 0, 0, 0.8);
+
+.invoice-table-item-name {
+    font-family: 'Lato', sans-serif; /* Replace 'Your Desired Font' with the desired font name */
+    font-size: 20px; /* Adjust the font size as needed */
+    font-weight: bold;
+    color: white;
+}
+
+
+
+#invoice_container {
+    opacity: 100%;
+    padding: 20px; /* Add padding to the container if necessary */
+}
+
+.jumbotron {
+    position: relative;
+    background-image: url('./images/michael.jpg'); /* Replace 'path/to/your/background.jpg' with the actual path to your background image */
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat;
+    color: white; /* Set the text color to contrast with the background */
+    padding: 100px; /* Add padding to the jumbotron if necessary */
+}
+
+
+
+
+#top_title {
+    color: white; /* Set the text color to contrast with the background */
+}
+
+body {
+    color: white; /* Set the default text color for the body */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+
+
+
+.buttons-container {
     color: black;
-    padding: 10px;
-    border-radius: 5px;
-    z-index: 1;
-    bottom: 125%; /* Adjust the distance from the image */
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: normal; /* Allow multiline descriptions */
+    display: flex;
+    justify-content: space-around;
 }
 
-.tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 200px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position the tooltip above the text */
-    left: 50%;
-    margin-left: -100px; /* Center the tooltip above the text */
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}

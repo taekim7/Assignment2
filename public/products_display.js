@@ -1,138 +1,146 @@
 //products_display.js
 
-// Function to check if the user is logged in
-function checkIfLoggedIn() {
-    // In a real-world scenario, you might have a more sophisticated check
-    // This is a simple example using a flag
-    return localStorage.getItem('isLoggedIn') === 'true';
-}
-
-// Update UI based on login status
-function updateUIBasedOnLoginStatus() {
-    let isLoggedIn = checkIfLoggedIn();
-    let logoffButton = document.getElementById('logoffButton');
-
-    if (isLoggedIn) {
-        logoffButton.style.display = 'block';
-    } else {
-        logoffButton.style.display = 'none';
-    }
-}
-
-// Logoff button click event
-document.getElementById('logoffButton').addEventListener('click', function () {
-    // Perform logoff actions
-    performLogoffActions();
-});
-
-// Perform logoff actions
-function performLogoffActions() {
-    // Clear the login status flag
-    localStorage.removeItem('isLoggedIn');
-    // Redirect to the login page
-    window.location.href = '/login.html';
-}
-
-// Call the function to update the UI based on login status
-updateUIBasedOnLoginStatus();
-
-//get parameters
+// get url parameters
 let params = (new URL(document.location)).searchParams;
-let error;
-let order = [];
 
-//get error value
-error = params.get('error');
 
-//get order array
-params.forEach((value,key) => {
-    if (key.startsWith('prod')) {
-            order.push(parseInt(value));
+window.onload = function() {
+    if (params.has('error')) {
+        console.log("Error: No quantities selected.");
+        document.getElementById('errorMessage').innerHTML = "No quantities selected.";
+        setTimeout(() => {
+            document.getElementById('errorMessage').innerHTML = "";
+        }, 6000);
+    } 
+    else if (params.has('inputError')) {
+        console.log("Input Error: Please fix errors before proceeding.");
+        document.getElementById('errorMessage').innerHTML = "Please fix errors before proceeding.";
+        setTimeout(() => {
+            document.getElementById('errorMessage').innerHTML = "";
+        }, 6000);
+
+        for (let i in products) {
+            let qtyInput = qty_form[`qty${[i]}_entered`];
+            let qtyError = document.getElementById(`qty${[i]}_error`);
+
+            if (params.get(`qty${i}`) !== null) {
+                qtyInput.value = params.get(`qty${i}`);
+            }
+
+            let errorMessage = validateQuantity(qtyInput.value, products[i].qty_available);
+            if (errorMessage.length > 0) {
+                console.log("Validation Error:", errorMessage);
+                qtyError.innerHTML = errorMessage.join('<br>');
+                qtyInput.parentElement.style.borderColor = "red";
+            } else {
+                qtyError.innerHTML = "";
+                qtyInput.parentElement.style.borderColor = "black";
+            }
         }
-});
-console.log('Order Array:', order);
-
-//Populate error message
-if(error == 'true'){
-    
-    document.getElementById('errorDiv').innerHTML += `<h2 class="text-danger"></h2><br>`;
+    }
+    if (params.has('name')) {
+        document.getElementById('helloMsg').innerHTML = `Welcome back ${params.get('name')}! Ready to buy more shoes?`;
+        for (let i in products) {
+            qty_form[`qty${i}`].value = params.get(`qty${i}`);
+        }
+    }
 }
 
-//Populate products
+
+
+// Populate the DOM Form with the product details
 for (let i = 0; i < products.length; i++) {
-    document.querySelector('.row').innerHTML += 
-        `<div class="col-md-6 product_name mb-4">
-        <div class="name">
-            <div class="text-center">
-                <img src="${products[i].image}" class="name-img" alt="Product Image" data-tooltip="${products[i].description}">
-            </div>
-            <div class="name-body">
-                <h5 class="name-title">${products[i].name}</h5>
-                <p class="name-text">
-                    Price: $${(products[i].price).toFixed(2)}<br>
-                    Available: ${products[i].qty_available}<br>
-                    Total Sold: ${products[i].total_sold}
-                </p>
-                
-                <input type="text" placeholder="0" name="quantity_textbox" id="${[i]}" class="form-control" oninput="validateQuantity(this)" value="${order[i] !== 0 && order[i] !== undefined ? order[i] : ''}" onload="validateQuantity(this)">
-                <p id="invalidQuantity${[i]}" class="text-danger"></p>
-                </div>
-            </div>
-        </div>`
-        validateQuantity(document.getElementById(`${[i]}`));
- ;}
+// Products Display Grid
+document.querySelector('.row').innerHTML += `
+    <div class="col-md-6 product_card">
+        <div>
+        <h5 style="float: center;" class="product_name">${products[i].name}</h5>
+        <h5 style="float: center;" class ="product_price">$${(products[i].price).toFixed(2)}</h5>
+        </div>  
+        <img src="${products[i].image}" class="img-thumbnail" alt="${products[i].alt}">
+        <div style="height: 90px;">
+        <table style="width: 100%; text-align: center; font-size: 18px;" id="product_table">
+        <tr>
+        <!-- Shoes available quantity for the product -->
+        <td style=";text-align: center; width: 20%;  ">Shoes Available: ${products[i].qty_available}</td>
+        <!-- Input textbox for quantity -->
+        <td style="text-align: center; width: 20%;" rowspan="2">
+        <input type="text" autocomplete="off" placeholder="Enter Quantity" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this,${products[i].qty_available})" value = "0">
+        <!-- Label for quantity -->
+        <label id="qty${[i]}_label" style="margin: 6px 0; float: center; padding-right: 10px;">Quantity:</label>
+        </td>
+        </tr>
+        <tr>
+        <!-- Sold Quantity -->
+        <td style="text-align: center; width: 35%;" id="qty_sold${i}">Sold: ${products[i].qty_sold}</td>
+        </tr>
+        <tr>
+        <!-- Error message -->
+        <td colspan="3" style="padding-top: 5px;"><div id="qty${[i]}_error" style="color: red;"></div></td>
+        </tr>
+        </table>
+        </div>  
+        </div>
+    `;
+}
 
-//function to validate the quantity, returns a string if not a number, negative, not an integer, or a combination of both
-    function validateQuantity(quantity){
-        //set variables, and grab number from the quantity and set it to an number
-        let valMessage = '';
-        let quantityNumber = Number(quantity.value);
-        //console.log(Number.isInteger(quantityNumber));
-        document.getElementById(`invalidQuantity${quantity.id}`).innerHTML = "validationMessage";
-        //console.log(products[quantity.id]['qty_available']);
-        //gets validation message if not a number, negative, not an integer, or if there is not enough items in stock
-        //else  empty string 
-        if(isNaN(quantityNumber)){
-            valMessage = "Please Enter a Number";
-        }else if (quantityNumber<0 && !Number.isInteger(quantityNumber)){
-            valMessage = "Please Enter a Positive Integer";
-        }else if (quantityNumber <0){
-            valMessage = "Please Enter a Positive Value";
-        }else if(!Number.isInteger(quantityNumber)){
-            valMessage = "Please Enter an Integer";
-        }else if(quantityNumber > products[quantity.id]['qty_available']){
-            valMessage = "Not Enough Items in Stock!";
-        }
-        else{
-            valMessage = '';
-        }
-        //set the valMessage to the innerHTML to the section
-        document.getElementById(`invalidQuantity${quantity.id}`).innerHTML = valMessage;
-        //console.log(products[quantity.id])
+// PERFORM CLIENT-SIDE DATA VALIDATION
+
+// Updated validateQuantity function
+function validateQuantity(quantity, availableQuantity) {
+    let errors = []; // Initialize an array to hold error messages
+
+    quantity=Number(quantity);
+
+    switch (true) {
+        case (isNaN(quantity)) && (quantity != ''):
+            errors.push("Not a number. Please enter a non-negative quantity to order.");
+            break;
+        case quantity < 0 && !Number.isInteger(quantity):
+            errors.push("Negative inventory and not an Integer. Please enter a non-negative quantity to order.");
+            break;
+        case quantity < 0:
+            errors.push("Negative inventory. Please enter a non-negative quantity to order.");
+            break;
+        case quantity !=0 && !Number.isInteger(quantity):
+            errors.push("Not an Integer. Please enter a non-negative quantity to order.");
+            break;
+        case quantity > availableQuantity:
+            errors.push(`We do not have ${quantity} available.`);
+            break;
+        // No default case needed as no errors means the array remains empty
     }
 
-    document.querySelector('form[name="qty_form"]').addEventListener('submit', function (event) {
-        event.preventDefault();
-    
-        // Check if the user is logged in (you can implement your own authentication logic)
-        let isLoggedIn = checkIfLoggedIn();
-    
-        if (isLoggedIn) {
-            // User is logged in, proceed to the invoice page
-            submitFormAndRedirect();
-        } else {
-            // User is not logged in, redirect to the login page
-            window.location.href = '/login.html';
-        }
-    });
-    
-    function checkIfLoggedIn() {
-        // In a real-world scenario, you might have a more sophisticated check
-        // This is a simple example using a session variable
-        return sessionStorage.getItem('isLoggedIn') === 'true';
+    return errors; // Return the array of errors
+};
+
+// CHECK INPUT BOXES AGAINST DATA VALIDATION FUNCTION
+// Remove leading 0's
+// Updated checkInputTextbox function
+function checkInputTextbox(textBox, availableQuantity) {
+    let str = String(textBox.value);
+
+    // Check if the first character is '0' and remove it if found
+    if (str.charAt(0) == '0') {
+        textBox.value = Number(str.slice(0, 0) + str.slice(1, str.length));
     }
 
-    function submitFormAndRedirect() {
-        // Submit the form to the process_form route
-        document.forms['qty_form'].submit();
+    // Convert the input value to a number
+    let inputValue = Number(textBox.value);
+
+    // Validate the user input quantity using the updated validateQuantity function
+    let errorMessage = validateQuantity(inputValue, availableQuantity);
+
+    // Check if there are any error messages and update the display
+    let errorDisplay = document.getElementById(textBox.name + '_error');
+    if (errorMessage.length > 0) {
+        errorDisplay.innerHTML = errorMessage.join('<br>');
+        errorDisplay.style.color = "red";
+        textBox.parentElement.style.borderColor = "red";
+    } else {
+        errorDisplay.innerHTML = "";
+        textBox.parentElement.style.borderColor = "black";
     }
+}
+
+

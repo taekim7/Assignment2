@@ -6,6 +6,141 @@
   border-radius: 0;
 }
 
+
+.audio-container {
+  text-align: center;
+  margin-top: 10px; /* Adjust the margin as needed */
+  
+}
+
+.song-info {
+  color: white; /* Set the text color for the song information */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+#artist,
+#title {
+  margin: 0;
+}
+
+#helloMsg {
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  top: 90%; /* Adjust the percentage to move it down or up */
+  line-height: 1;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+
+	--bkg: #5eb3fd;
+	--white: #e7e6e6;
+
+	background-color: var(--white);
+	background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+}
+
+.container2 {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+}
+
+.title {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.title h5 {
+	font-size: 25vmin;
+	font-weight: 900;
+	font-family: "Montserrat", sans-serif;
+	color: black;
+}
+
+
+.ghost {
+	width: 8vmin;
+	height: 12vmin;
+	background-color: var(--white);
+	background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+	background-image: radial-gradient(ellipse at 35% 40%, #000 8%, transparent 0%),
+		radial-gradient(ellipse at 65% 40%, #000 8%, transparent 0%),
+		radial-gradient(ellipse at 50% 60%, #000 8%, transparent 0%);
+	border-radius: 100% / 70% 70% 0% 0%;
+	transform: translateX(100em) rotateZ(-90deg);
+	position: relative;
+	opacity: 0.9;
+	mix-blend-mode: exclusion;
+	animation: ghostMove 4s ease-out infinite;
+}
+@keyframes ghostMove {
+	0% {
+		transform: translateX(30em) rotateZ(-90deg);
+	}
+	100% {
+		transform: translateX(-35em) rotateZ(-90deg);
+	}
+}
+.ghost div {
+	position: absolute;
+	width: 20%;
+	background-color: var(--white);
+	background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+}
+.ghost div:nth-of-type(1) {
+	height: 7vmin;
+	left: 0;
+	bottom: -6vmin;
+	border-radius: 100% / 0% 0% 50% 50%;
+}
+.ghost div:nth-of-type(2),
+.ghost div:nth-of-type(4) {
+	height: 4vmin;
+	left: 20%;
+	bottom: -3vmin;
+	border-radius: 100% / 50% 50% 0% 0%;
+	background-color: transparent;
+}
+.ghost div:nth-of-type(3) {
+	height: 4vmin;
+	left: 40%;
+	bottom: -3.95vmin;
+	border-radius: 100% / 0% 0% 60% 60%;
+	background-color: var(--white);
+}
+.ghost div:nth-of-type(4) {
+	left: 60%;
+}
+.ghost div:nth-of-type(5) {
+	height: 3vmin;
+	left: 80%;
+	bottom: -2.9vmin;
+	border-radius: 100% / 0% 0% 70% 70%;
+	background-color: var(--white);
+}
+
+
+
 /* Remove the jumbotron's default bottom margin */ 
  .jumbotron {
   margin-bottom: 0;
@@ -16,13 +151,21 @@ footer {
   background-color: #f2f2f2;
   padding: 25px;
 }
+
+.qty_form {
+  text-align: center;
+}
+
   /* Remove the jumbotron's default bottom margin */ 
-   .jumbotron {
-    margin-bottom: 0;
-    background-image: url(./images/bballcourt.jpeg);
-    background-size: cover;
-    background-position: center;
-  }
+
+  .jumbotron {
+    position: relative;
+    background-image: url('./images/michael.jpg'); /* Replace 'path/to/your/background.jpg' with the actual path to your background image */
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat;
+    color: white; /* Set the text color to contrast with the background */
+    padding: 100px; /* Add padding to the jumbotron if necessary */
+}
 
   /*Top Title */
   h1 {
@@ -72,7 +215,7 @@ footer {
     background-color: azure;
     padding: 20px 0;
   }
-  /*Purchase Button*/
+  /*------------------Purchase Button-------------------------------*/
   input[type="submit"]{
     font-size: 30px; 
     display: inline-block;
@@ -84,7 +227,7 @@ footer {
     border-radius: 5px;
     cursor: pointer; /* Show a pointer cursor on hover */
     position: relative;
-    top: 130%;
+    top: 100%;
     left: 3%;
     transform: translateX(-50%);
   }
@@ -109,14 +252,35 @@ footer {
     font-style: oblique;
   }
 
-.name-img {
-  width: 700px;
-  height: 500px;
-  border: 40px;
+.img-thumbnail {
+  width: 100%;
+  border: 40px solid black;
 }
 
+.col-md-6.product_card {
+  margin-bottom: 40px;
+  padding: 15px
+}
 
+.product_name {
+  float: center;
+  width: 100%; /* Make each product container take the full width of its parent */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  padding-left: 70px;
+}
 
+.product_price {
+  float: center;
+  width: 100%; /* Make each product container take the full width of its parent */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  padding-left: 100px;
+}
+
+.img-thumbnail{
+  width: 100%;
+}
   .main {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Create a 3-column grid */

@@ -16,58 +16,45 @@
       <div class="jumbotron">
         <div class="container text-center">
         <h1><span id="top_title">Cool Shoe Store</span></h1>
-        <p>Here is your invoice. Thank you for your purchase and enjoy your shoes!</p>
-        <h5 id = "hellomsg" style="color: red" ></h5>
-        <button id="logoffButton" style="display: none;">Log Off</button>
+        <img src = "images/carlton.gif" width="20%">
+        <h3 id = "helloMsg" style = "color: black"></h3>
         </div>
+        
 
 
 
 
 
                                           <!--Invoice Table-->
-        <div class ="container">
-                                      <!--Invoice Table Creation-->
-        <table class="table">
-            <tbody>
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Shoe Name</th>
-                  <th>Quantity Purchased</th>
-                  <th>Price</th>
-                  <th>Extended Price</th>
-              </tr>
-              </thead>
-              <tbody id="invoiceTable"></tbody>
-              <!-- Product rows will be added dynamically using JavaScript -->
-              </tbody>
-              <!--Invoice Table Footer for total, tax, shipping-->
-              <tfoot>
-                <tr>
-                    <td colspan="4">Sub-total</td>
-                    <td id="subtotal_cell">$0.00</td>
-                </tr>
-                <tr>
-                    <td colspan="4">Hawaii SalesTax 4%</td>
-                    <td id="tax_cell">$0.00</td>
-                </tr>
-                <tr>
-                    <td colspan="4">Shipping</td>
-                    <td id="shipping_cell">$0.00</td>
-                </tr>
-                <tr>
-                    <td colspan="4"><strong>Total</strong></td>
-                    <td id="total_cell"><strong>$0.00</strong></td>
-                </tr>
-            </tfoot>
-            </table>
-          </div>
-<div class = "buttons-container">
-  <form name = "invoice" method = "POST"></form>
-  <input class = "sm-button" type = "submit" value = "Continue Shopping" name = "continue" onclick = "invoice.action='/continue_shopping'" style = "width: 40%">
+      <!-- INVOICE TABLE -->
+      <div id="invoice_container">
+      <table class="table">
+        <thead style="background-color: #0C090A; color: #f7fcff; font-weight: bolder;">
+            <tr>
+                <th colspan="2">Item</th>
+                <th>Quantity Purchased</th>
+                <th>Remaining Inventory</th>
+                <th>Price</th>
+                <th>Extended Price</th>
+            </tr>
+        </thead>
+        <tbody id="invoice_table"></tbody>
+        <tbody id="total_display"></tbody>
+    </table>
+</div>
 
-  <input class = "sm-button" type = "submit" value = "Complete Purchase" name = "logout" onclick = "invoice.action='/purchase_logout'" style = "width: 40%">
+<div class = "buttons-container">
+  <form name = "invoice" method = "POST">
+    <div class="button-wrapper">
+    <input class = "sm-button-highlight" type = "submit" value = "Continue Shopping" name = "continue" onclick = "invoice.action='/continue_shopping'" style = "width: 40%">
+    <img src = "images/kylo-ren-more-gif.gif" width="25%">
+    </div>
+
+    <div class="button-wrapper2">
+    <input class = "sm-button-highlight" type = "submit" value = "Complete Purchase" name = "logout" onclick = "invoice.action='/purchase_logout'" style = "width: 40%">
+    <img src = "images/loki.gif" width="25%">
+    </div>
+  </form>
 </div>
 
 

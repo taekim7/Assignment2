@@ -1,0 +1,22 @@
+body {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+
+	--bkg: #5eb3fd;
+	--white: #e7e6e6;
+
+	background-color: var(--white);
+	background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+}
+
+
+.center-button {
+    text-align: center;
+}
+
+.login-button {
+    font-size: 20px;
+    padding: 10px 20px;
+    vertical-align: top;
+}
