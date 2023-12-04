@@ -52,35 +52,41 @@ window.onload = function() {
 for (let i = 0; i < products.length; i++) {
 // Products Display Grid
 document.querySelector('.row').innerHTML += `
-    <div class="col-md-6 product_card">
-        <div>
-        <h5 style="float: center;" class="product_name">${products[i].name}</h5>
-        <h5 style="float: center;" class ="product_price">$${(products[i].price).toFixed(2)}</h5>
-        </div>  
-        <img src="${products[i].image}" class="img-thumbnail" alt="${products[i].alt}">
-        <div style="height: 90px;">
-        <table style="width: 100%; text-align: center; font-size: 18px;" id="product_table">
+<div class="col-md-6 product_card">
+<div>
+    <h5 style="font-size: 35px; text-align: left; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" class="col-md-10 product_name mb-4">${products[i].name}</h5>
+    <h5 style="font-size: 35px; text-align: left; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" class="col-md-10 product_price mb-4">$${(products[i].price).toFixed(2)}</h5>
+</div>  
+
+<img src="${products[i].image}" class="img-thumbnail" alt="${products[i].alt}" data-tooltip="${products[i].description}">
+
+<div style="height: 90px;">
+    <table style="width: 100%; text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 15px;" id="product_table">
         <tr>
-        <!-- Shoes available quantity for the product -->
-        <td style=";text-align: center; width: 20%;  ">Shoes Available: ${products[i].qty_available}</td>
-        <!-- Input textbox for quantity -->
-        <td style="text-align: center; width: 20%;" rowspan="2">
-        <input type="text" autocomplete="off" placeholder="Enter Quantity" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this,${products[i].qty_available})" value = "0">
-        <!-- Label for quantity -->
-        <label id="qty${[i]}_label" style="margin: 6px 0; float: center; padding-right: 10px;">Quantity:</label>
-        </td>
+            <!-- Shoes available for the product -->
+            <td style="text-align: left; width: 20%;">Shoes Available: ${products[i].qty_available}</td>
+            
+            <!-- Label for quantity -->
+            <td style="text-align: right; width: 10%;">
+                <label id="qty${[i]}_label" style="top: 5px; position: relative; left: 10px; font-size: 20px; padding-right: 10px;">Quantity:  </label>
+            </td>
+
+            <!-- Input textbox for quantity -->
+            <td style="text-align: left; width: 20%;">
+                <input type="text" autocomplete="off" placeholder="Enter Quantity" name="qty${[i]}" id="qty${[i]}_entered" class="inputBox" onkeyup="checkInputTextbox(this,${products[i].qty_available})" value="0">
+            </td>
         </tr>
         <tr>
-        <!-- Sold Quantity -->
-        <td style="text-align: center; width: 35%;" id="qty_sold${i}">Sold: ${products[i].qty_sold}</td>
+            <!-- Sold Quantity -->
+            <td style="text-align: left; width: 35%;" colspan="2">Shoes Sold: ${products[i].qty_sold}</td>
         </tr>
         <tr>
-        <!-- Error message -->
-        <td colspan="3" style="padding-top: 5px;"><div id="qty${[i]}_error" style="color: red;"></div></td>
+            <!-- Error message -->
+            <td colspan="3" style="padding-top: 5px;"><div id="qty${[i]}_error" style="color: red;"></div></td>
         </tr>
-        </table>
-        </div>  
-        </div>
+    </table>
+</div>  
+</div>
     `;
 }
 

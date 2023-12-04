@@ -14,40 +14,56 @@
     <div class="jumbotron">
         <div class="container text-center">
             <h1><span id="top_title">Cool Shoe Store</span></h1>
-
             <h2>Login Page</h2>
+
+            <!-------- This is a form for user login with action "/process_login" and method "POST" --------->
             <form action="/process_login" method="POST" name = "login_form">
+
+
+            <!-------------------------------------Email Address--------------------------------------------->
+
                 <table style = "margin: auto;">
                     <tr style = "height: 50px;">
-                        <td style = "width: 30%; text-align: right; padding-right: 10px; font-weight: bold;">
-                        <label>Email Address</label>    
-                        </td>
-                        <td style = "width: 40%;">
-                            <input class = "input" type = "text" name = "email" id = "email" size = "40" placeholder="enter email">
-                        </td>
-                        <td style = "width: 30%;"></td>
-                    </tr>
-                    <tr>
+                    <td style = "width: 30%; text-align: right; padding-right: 10px; font-weight: bold;">
+                    <label>Email Address</label>    
+                </td>
+                    <td style = "width: 40%;">
+                    <input class = "input" type = "text" name = "email" id = "email" size = "40" placeholder="enter email">
+                </td>
+                    <td style = "width: 30%;"></td>
+                </tr>
+
+
+            <!--------------------------------------Password------------------------------------------------>
+                <tr>
                     <tr style = "height: 60px;">
                     <td style = "width: 30%; text-align: right; padding-right: 10px; font-weight: bold;">
-                        <label>Password</label>
-                    </td>
+                    <label>Password</label>
+                </td>
                     <td style = "width: 40%;" style = "line-height: 70%;">
-                        <input class = "input" type = "password" name = "password" id = "password" size = "40" placeholder="enter password">
-                        <input type="checkbox" id="showPasswordCheckbox"> Show Password
-                    </td>
-                    </tr>
+                    <input class = "input" type = "password" name = "password" id = "password" size = "40" placeholder="enter password">
+                    <input type="checkbox" id="showPasswordCheckbox" style="text-align: right;"> Show Password
+                </td>
+
+
+
+            <!------------------------------------Error Message---------------------------------------------->
+                </tr>
                     <tr style = "height: 60px;">
-                        <td colspan = "3" id ="errorMessage" style = "color: red;"></td>
-                    </tr>
+                    <td colspan = "3" id ="errorMessage" style = "color: red;"></td>
+                </tr>
+
+            <!--------------------------------------Login Button---------------------------------------------->
                     <tr style = "height: 100px;">
-                        <td colspan="3" class="center-button">
-                            <input class = "sm-button highlight login-button" type = "submit" value="login">
-                        </td>
-                    </tr>
-                    <tr>
-                    <td colspan = "3"> Don't have an account? Register here!  <a href="/register.html" class = "link" style = "text-decoration: underline;">Register</a></td>
-                    </tr>
+                    <td colspan="3" class="center-button">
+                    <input class = "sm-button highlight login-button" type = "submit" value="login">
+                </td>
+                </tr>
+            
+            <!-----------------------------------Register Button---------------------------------------------->
+                <tr>
+                    <td colspan = "3"> Or Register now to get started!  <a href="/register.html" class = "link" style = "text-decoration: underline;">Register</a></td>
+                </tr>
     </table>
 </form>
 </div>

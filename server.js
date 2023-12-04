@@ -1,5 +1,7 @@
 //server.js
 
+// Importing the crypto module
+const crypto = require('crypto');
 // Importing the Express.js framework 
 const express = require('express');
 // Create an instance of the Express application called "app"
@@ -161,8 +163,8 @@ else {
 
 
 //===========================App Post Login Form==========================//
-// This code block defines a route handler for the POST request to the "/process_login" endpoint.
-app.post("/process_login", function (request, response) {
+// This code block handles a POST request to the '/process_login' endpoint of the app.
+app.post('/process_login', (request, response) => {
     // Retrieve the data from the request body
     let POST = request.body;
     let entered_email = POST['email'].toLowerCase();
@@ -172,11 +174,20 @@ app.post("/process_login", function (request, response) {
     if (entered_email.length == 0 && entered_password.length == 0) {
         // Set an error message indicating that the email and password should be entered
         response.query.loginError = 'Please enter email and password';
+        response.redirect(`./login.html?${qs.stringify(request.query)}`);
+        return;
     }
+
     // If the entered email exists in the user_data object
-    else if (user_data[entered_email]) {
-        // Check if the entered password matches the password associated with the entered email
-        if (user_data[entered_email].password == entered_password) {
+    if (user_data[entered_email]) {
+        // Extract the stored password and salt from the stored password string
+        const [storedSalt, storedHash] = user_data[entered_email].password.split(':');
+
+        // Use the entered password and stored salt to create a hash using SHA-256 algorithm
+        const enteredHash = crypto.pbkdf2Sync(entered_password, storedSalt, 10000, 512, 'sha256').toString('hex');
+
+        // Check if the entered hash matches the stored hash
+        if (enteredHash === storedHash) {
             // If the password is correct, create a temporary user object with the entered email and name
             temp_user['email'] = entered_email;
             temp_user['name'] = user_data[entered_email].name;
@@ -184,26 +195,16 @@ app.post("/process_login", function (request, response) {
             // Log the temporary user object
             console.log(temp_user);
 
-            // Create a URLSearchParams object with the temporary user object
-            let params = new URLSearchParams(temp_user);
             // Redirect the user to the invoice page with a query parameter indicating success and the temporary user information
+            let params = new URLSearchParams(temp_user);
             response.redirect(`./invoice.html?valid&${params.toString()}`);
             return;
-        }
-        // If the entered password is empty
-        else if (entered_password == 0) {
-            // Set an error message indicating that the password should be entered
-            request.query.loginError = 'Please enter password';
-        }
-        // If the entered password is incorrect
-        else {
-            // Set an error message indicating that the password is incorrect
+        } else {
+            // If the entered password is incorrect
             request.query.loginError = 'Incorrect password';
         }
-    }
-    // If the entered email does not exist in the user_data object
-    else {
-        // Set an error message indicating that the email is incorrect
+    } else {
+        // If the entered email does not exist in the user_data object
         request.query.loginError = 'Incorrect email';
     }
 
@@ -212,7 +213,7 @@ app.post("/process_login", function (request, response) {
     // Create a URLSearchParams object with the request query parameters
     let params = new URLSearchParams(request.query);
     // Redirect the user back to the login page with the query parameters indicating the login error and the entered email
-    response.redirect (`./login.html?${params.toString()}`);
+    response.redirect(`./login.html?${params.toString()}`);
 });
 
 
@@ -294,9 +295,10 @@ app.post("/process_register", function (request, response) {
 
     //Server Response to check if there are no errors
     if (Object.keys(registration_errors).length == 0) {
+        const encryptedPassword = encryptPassword(reg_password);
         user_data[reg_email] = {};
         user_data[reg_email].name = reg_name;
-        user_data[reg_email].password = reg_password;
+        user_data[reg_email].password = encryptedPassword;
         
         //Write the updated user_data object to the user_data.json file
         fs.writeFile(__dirname + '/user_data.json', JSON.stringify(user_data), 'utf-8', (error) => {
@@ -336,6 +338,16 @@ function validateConfirmPassword(password, confirm_password) {
     if (confirm_password !== password) {
         registration_errors ['confirm_password_type'] = 'Passwords do not match';
     }
+}
+
+// Encrypt Password Function
+function encryptPassword(password) {
+    // Generate a random salt for each user
+    const salt = crypto.randomBytes(16).toString('hex');
+    // Use the password and salt to create a hash using SHA-256 algorithm
+    const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha256').toString('hex');
+    // Store both the salt and hash in the database
+    return `${salt}:${hash}`;
 }
 
 // Validate Password Function

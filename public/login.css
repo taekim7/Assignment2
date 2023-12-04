@@ -7,7 +7,7 @@ body {
 	--white: #e7e6e6;
 
 	background-color: var(--white);
-	background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+	background-image: url("./images/nike-air-jordan-1.jpg");
 }
 
 
@@ -18,5 +18,5 @@ body {
 .login-button {
     font-size: 20px;
     padding: 10px 20px;
-    vertical-align: top;
+	
 }

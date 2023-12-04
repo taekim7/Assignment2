@@ -16,7 +16,7 @@ window.onload = function() {
             </body>
         `)
     } else {
-        document.getElementById('helloMsg').innerHTML = `Thank you for your purchase ${params.get('name')}`;
+        document.getElementById('helloMsg').innerHTML = `Thank you for your purchase ${params.get('name')}! Come back for more!`;
     }
 }
 //=====================================Global Variables==========================//
